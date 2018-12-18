@@ -108,6 +108,6 @@ report
 
 #pytest 忽略文件
 .pytest_cache
-
+img
 
 

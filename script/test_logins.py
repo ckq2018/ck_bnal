@@ -32,7 +32,8 @@ class TestLogin():
         self.login.driver.quit()
 
     # 参数化
-    @pytest.mark.parametrize("usersname, pwd, expect_result, expect_toast", get_function())
+    @pytest.mark.parametrize("usersname, p"
+                             "wd, expect_result, expect_toast", get_function())
     @allure.step("美妙的测试之旅即将开始")
     def test_login(self, usersname, pwd, expect_result, expect_toast):
         if expect_result:
@@ -54,6 +55,8 @@ class TestLogin():
                 self.login.page_click_logins()
             except AssertionError:
                 self.login.base_get_image()
+                with open("./img/fail.png", "rb") as f:
+                    allure.attach("失败原因", f.read(), allure.attach_type.PNG)
         else :
             try:
                 # 输入用户名
@@ -63,7 +66,7 @@ class TestLogin():
                 # 点击登录
                 self.login.page_click_login()
                 # assert expect_toast in self.login.base_get_toset()
-                assert "chengkaiqing" in self.login.base_get_toset()
+                assert expect_toast in self.login.base_get_toset()
             except AssertionError:
                 self.login.base_get_image()
                 with open("./img/fail.png", "rb") as f:
