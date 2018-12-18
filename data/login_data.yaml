@@ -1,0 +1,32 @@
+al_login_1:
+  usersname: "18665189551"
+  pwd: "123456"
+  expect_result: "chenkaiqing"
+al_login_2:
+  usersname: "chenkaiqing"
+  pwd: "123456"
+  expect_result: "chenkaiqing"
+al_login_3:
+  usersname: " 18665189551 "
+  pwd: "123456"
+  expect_result: "chenkaiqing"
+al_login_4:
+  usersname: " chenkaiqing "
+  pwd: "123456"
+  expect_result: "chenkaiqing"
+al_login_5:
+  usersname: "186651895511"
+  pwd: "123456"
+  expect_toast: "此用户不存在"
+al_login_6:
+  usersname: "18665189551"
+  pwd: "1234566"
+  expect_toast: "登录密码错误"
+al_login_7:
+  usersname: "chenkaiqingg"
+  pwd: "123456"
+  expect_toast: "此用户不存在"
+al_login_8:
+  usersname: "chenkaiqing"
+  pwd: "1234566"
+  expect_toast: "登录密码错误"
