@@ -14,4 +14,7 @@ class ReadYaml():
             return yaml.load(f)
 
 if __name__ == '__main__':
-    print(ReadYaml("../data/login_data.yaml").read_yaml())
+    list = [ ]
+    for i in ReadYaml("../data/address_data.yaml").read_yaml().values():
+        list.append((i.get("name"), i.get("phone"), i.get("province"), i.get("city"), i.get("area"), i.get("detail"), i.get("code")))
+    print(list)

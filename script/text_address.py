@@ -1,6 +1,8 @@
 import sys
 import os
 
+from base.read_yaml import ReadYaml
+
 sys.path.append(os.getcwd())
 
 import allure
@@ -10,13 +12,18 @@ from page.page_in import PageIn
 import pytest
 
 
-def get_address():
+def get_address(add_data):
+    if add_data == "add":
+        list = []
+        for i in ReadYaml("address_data.yaml").read_yaml().get("add_address").values():
+            list.append((i.get("name"), i.get("phone"), i.get("province"), i.get("city"), i.get("area"), i.get("detail"), i.get("code")))
+        return list
+    elif add_data == "update":
+        list = []
+        for i in ReadYaml("address_data.yaml").read_yaml().get("update_address").values():
+            list.append((i.get("name"), i.get("phone"), i.get("province"), i.get("city"), i.get("area"), i.get("detail"), i.get("code")))
+        return list
 
-    return [("王五", "13838387777", "广东", "东莞", "", "人民路55号", "100086")]
-
-def get_data1():
-
-    return [("王小五", "13838388888", "浙江", "杭州", "上城", "解放路88号", "100010")]
 
 class TestAddress():
 
@@ -28,7 +35,7 @@ class TestAddress():
     def teardown_class(self):
         self.address.driver.quit()
 
-    @pytest.mark.parametrize("name, phone, province, city, area, detail, code", get_address())
+    @pytest.mark.parametrize("name, phone, province, city, area, detail, code", get_address("add"))
     def test_address(self, name, phone, province, city, area, detail, code):
         # 点击新增地址
         self.address.page_click_new_address()
@@ -57,19 +64,18 @@ class TestAddress():
             with open("./img/fail.png", "rb") as f:
                 allure.attach("失败的原因", f.read(), allure.attach_type.PNG)
 
-    @pytest.mark.parametrize("name, phone, province, city, area,detail, code", get_data1())
-    def test_updata(self, name, phone, province, city, area,detail, code):
-        #点击编辑
+    @pytest.mark.parametrize("name, phone, province, city, area,detail, code", get_address("update"))
+    def test_updata(self, name, phone, province, city, area, detail, code):
+        # 点击编辑
         self.address.page_click_edit()
 
-        #点击  修改内容
-        self.address.page_updata_element(name, phone, province, city, area,detail, code)
+        # 点击  修改内容
+        self.address.page_updata_element(name, phone, province, city, area, detail, code)
 
         # 组装字符串
         expect_results = name + "  " + phone
         try:
             assert expect_results in self.address.page_get_elements()
-            print("组装的结果: ", expect_results)
         except:
             self.address.base_get_image()
             # 截图

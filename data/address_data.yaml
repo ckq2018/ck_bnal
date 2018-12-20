@@ -1,0 +1,18 @@
+add_address:
+  al_address_001:
+    name: "叶凡"
+    phone: "19393838383"
+    province: "广东"
+    city: "广州"
+    area: "白云"
+    detail: "白云大道北"
+    code: "560000"
+update_address:
+  al_address_001:
+    name: "叶熙"
+    phone: "14857484390"
+    province: "广东"
+    city: "深圳"
+    area: "宝安"
+    detail: "人民路48号"
+    code: "341111"
