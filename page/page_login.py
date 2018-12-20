@@ -55,13 +55,23 @@ class PageLogin(Base):
     def page_click_is_exit(self):
         self.base_click(page.loc_is_exit)
 
+    # 封装整体的拖拽退出登录方法
     def page_exits(self):
         self.page_drag_and_drop()
         self.page_click_exit()
         self.page_click_is_exit()
 
-
-
-
-
-
+    # 封装整体的   点击设置, 点击的地址管理, 点击
+    def page_login(self, username=18665189551, password=123456):
+        # 点击我
+        self.base_click(page.loc_my)
+        # 点击已有账号 ,去登录
+        self.base_click(page.loc_logins)
+        # 输入用户名
+        self.base_send_keys(page.loc_username, username)
+        # 输入密码
+        self.base_send_keys(page.loc_password, password)
+        # 点击登录
+        self.base_click(page.loc_login)
+        # 点击设置
+        self.base_click(page.loc_click_set)

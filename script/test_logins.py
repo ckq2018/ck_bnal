@@ -32,8 +32,7 @@ class TestLogin():
         self.login.driver.quit()
 
     # 参数化
-    @pytest.mark.parametrize("usersname, p"
-                             "wd, expect_result, expect_toast", get_function())
+    @pytest.mark.parametrize("usersname, pwd, expect_result, expect_toast", get_function())
     @allure.step("美妙的测试之旅即将开始")
     def test_login(self, usersname, pwd, expect_result, expect_toast):
         if expect_result:
