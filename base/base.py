@@ -37,8 +37,9 @@ class Base():
 
     # 根据文本,查找元素
     def base_text_get_element(self, text):
-        loc = By.XPATH, "//*[contains(@text,'%s')]" %text
+        loc = By.XPATH, "//*[contains(@text,'%s')]" % text
         return self.base_find(loc, timeout=20, poll=0.1)
+
     def base_text_click(self, text):
         self.base_text_get_element(text).click()
 
@@ -46,6 +47,6 @@ class Base():
     def base_text_get_elements(self, text):
         loc = By.XPATH, "//*[contains(@text,'%s')]" % text
         return self.base_find_elements(loc, timeout=20, poll=0.1)
-    def base_text_click_elements(self, text, num=0):
 
+    def base_text_click_elements(self, text, num=0):
         self.base_text_get_elements(text)[num].click()

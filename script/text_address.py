@@ -27,14 +27,19 @@ def get_address(add_data):
 
 class TestAddress():
 
+    # 初始化
+    @allure.step("初始化操作")
     def setup_class(self):
         PageIn().page_in().page_login()
         self.address = PageIn().page_address()
         self.address.page_click_address_manage()
 
+    @allure.step("结束操作")
     def teardown_class(self):
         self.address.driver.quit()
 
+    @allure.step("测试用例   新增地址")
+    @pytest.mark.run(order=1)
     @pytest.mark.parametrize("name, phone, province, city, area, detail, code", get_address("add"))
     def test_address(self, name, phone, province, city, area, detail, code):
         # 点击新增地址
@@ -64,6 +69,8 @@ class TestAddress():
             with open("./img/fail.png", "rb") as f:
                 allure.attach("失败的原因", f.read(), allure.attach_type.PNG)
 
+    @allure.step("测试用例   修改地址")
+    @pytest.mark.run(order=2)
     @pytest.mark.parametrize("name, phone, province, city, area,detail, code", get_address("update"))
     def test_updata(self, name, phone, province, city, area, detail, code):
         # 点击编辑
@@ -81,3 +88,12 @@ class TestAddress():
             # 截图
             with open("./img/fail.png", "rb") as f:
                 allure.attach("失败的原因", f.read(), allure.attach_type.PNG)
+
+    # 删除地址
+    @pytest.mark.run(order=3)
+    @allure.step("测试用例   删除地址")
+    def test_delete_address(self):
+        # 删除地址
+        self.address.page_delete_address()
+        # 断言
+        assert self.address.page_is_have_address()

@@ -41,3 +41,5 @@ address_default = By.ID, "com.yunmall.lc:id/address_default"
 address_save = By.ID, "com.yunmall.lc:id/button_send"
 # 获取所有的收件人和电话 (id都是一样)
 receipt_name = By.ID, "com.yunmall.lc:id/receipt_name"
+# 获取删除时的确认
+address_is_ok = By.ID, "com.yunmall.lc:id/ymdialog_left_button"

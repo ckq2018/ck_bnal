@@ -15,6 +15,6 @@ class ReadYaml():
 
 if __name__ == '__main__':
     list = [ ]
-    for i in ReadYaml("../data/address_data.yaml").read_yaml().values():
+    for i in ReadYaml("../data/address_data.yaml").read_yaml().get("add_address").values():
         list.append((i.get("name"), i.get("phone"), i.get("province"), i.get("city"), i.get("area"), i.get("detail"), i.get("code")))
     print(list)
